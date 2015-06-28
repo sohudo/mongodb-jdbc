@@ -32,7 +32,7 @@ public class Pretest {
 		    	       username="ms";
 		    	       password="Kingmed123";		    	       
 		    	       break;
-		    	case 5:jdbcdriver="com.mongodb.jdbc.MongoDriver";
+		    	case 5:jdbcdriver="org.opencloudb.jdbc.mongodb.MongoDriver";
 		    	       jdbcurl="mongodb://192.168.0.99/test";
 		    		   break;
 		    	case 7:jdbcdriver="org.opencloudb.jdbc.sequoiadb.SequoiaDriver";
