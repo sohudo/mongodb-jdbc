@@ -25,11 +25,9 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.util.Calendar;
-import java.util.HashMap;
+import java.util.*;
 //import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+
 /**  
  * 功能详细描述
  * @author sohudo[http://blog.csdn.net/wind520]
@@ -52,6 +50,8 @@ public class MongoResultSet implements ResultSet
 	 private boolean isGroupBy=false;
 	 private long _sum=0;
 	 private BasicDBList dblist;
+
+    private HashMap aliases;
 	 
 	public MongoResultSet(MongoData mongo,String schema) throws SQLException {
 	    this._cursor = mongo.getCursor();
@@ -60,6 +60,7 @@ public class MongoResultSet implements ResultSet
 	    this.isSum   = mongo.getCount()>0;
 	    this._sum    = mongo.getCount();
 	    this.isGroupBy= mongo.getType();
+        this.aliases = mongo.getColumnAliasMap();
 	    
 	    if (this.isGroupBy) {
 	    	dblist  = mongo.getGrouyBys();
@@ -67,8 +68,8 @@ public class MongoResultSet implements ResultSet
 	    }
 	    if (this._cursor!=null) {
 	      select = (String[]) _cursor.getKeysWanted().keySet().toArray(new String[0]);
-	    
-	      if ( this._cursor.hasNext()){
+
+            if ( this._cursor.hasNext()){
 	        _cur= _cursor.next(); 
 	        if (_cur!=null) {
 	           if (select.length==0) {
@@ -418,8 +419,12 @@ public class MongoResultSet implements ResultSet
 
 	@Override
 	public ResultSetMetaData getMetaData() throws SQLException {
-		
-		return new MongoResultSetMetaData(select,fieldtype,this._schema,this._table);
+		String[] meta = new String[select.length];
+        List<String> columnList = Arrays.asList(select);
+        for(String column : columnList){
+            meta[columnList.indexOf(column)] = aliases.containsKey(column)?aliases.get(column).toString():column;
+        }
+		return new MongoResultSetMetaData(meta,fieldtype,this._schema,this._table);
 		/*
 	 	if(_cur !=null){
 	 		return new MongoResultSetMetaData(_cur.keySet(),this._schema);  
