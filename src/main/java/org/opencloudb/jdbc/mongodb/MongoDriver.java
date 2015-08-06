@@ -57,7 +57,7 @@ public class MongoDriver implements Driver
 			return null;
 		}
 		
-		if (!StringUtils.startsWithIgnoreCase(url, PREFIX)) {	
+		if (!MongoUtils.startsWithIgnoreCase(url, PREFIX)) {
 			return null;
 		}
 		
@@ -76,10 +76,10 @@ public class MongoDriver implements Driver
 	
 	@Override
 	public boolean acceptsURL(String url) throws SQLException {
-		if (!StringUtils.startsWithIgnoreCase(url, PREFIX)) {
-			return true;
+		if (!MongoUtils.startsWithIgnoreCase(url, PREFIX)) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
