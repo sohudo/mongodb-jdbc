@@ -36,7 +36,7 @@ public class Pretest {
 		    	       jdbcurl="mongodb://192.168.0.99/test";
 		    		   break;
 		    	case 7:jdbcdriver="org.opencloudb.jdbc.sequoiadb.SequoiaDriver";
-	    	       jdbcurl="sequoiadb://1426587161.dbaas.sequoialab.net:11920/sqlCS";
+	    	       jdbcurl="sequoiadb://1426587161.dbaas.sequoialab.net:11920/SAMPLE";
 	    		   break;		    		   
 		    	case 6:jdbcdriver="com.mysql.jdbc.Driver";
 		    	       jdbcurl="jdbc:mysql://localhost:8066/TESTDB";
@@ -70,8 +70,8 @@ public class Pretest {
 		       // st.executeUpdate("delete from sqlCL where b='xx'");
 		       // sql = "insert into " + csFullName + " (a,b,c)" + " values(2,\"xx\",21)";
 		        
-		       // st.executeUpdate("create table people (name varchar(30),age int,sex int,diqu varchar(20),lev int)");
-		      //  st.executeUpdate("insert into people (name,age,sex,diqu,lev) values('xx',20,1,'gz',2)");
+		       //st.executeUpdate("create table people (name varchar(30),age int,sex int,diqu varchar(20),lev int)");
+		        //st.executeUpdate("insert into people (name,age,sex,diqu,lev) values('xx',20,1,'gz',2)");
 		      //  st.execute("delete from people  where name='xx'");
 		      // st.execute(" drop table people");
 		       print( "测试 " , st.executeQuery("select * from people "));                
